@@ -1,0 +1,357 @@
+:3
+# ----------------------------------------------------------------------------
+# LICENSE: Write AGPLv3 + HSON Sovereign Addendum LICENSE file
+# ----------------------------------------------------------------------------
+cat > LICENSE << 'EOF'
+/ FungeOS Meta‑OS License
+Copyright © 2026 Darrell Lee Stiltner
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+This software is licensed under:
+
+GNU AFFERO GENERAL PUBLIC LICENSE v3.0  
+WITH  SOVEREIGN ADDENDUM v1.0  
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public
+License along with this program. If not, see:
+https://www.gnu.org/licenses/agpl-3.0.en.html
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HSON SOVEREIGN ADDENDUM (AGPLv3 Section 7 Additional Terms)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. NON‑VIOLENCE INVARIANT  
+   This software may not be used for:
+   • military systems  
+   • weapons development  
+   • surveillance systems  
+   • torture, oppression, or human rights violations  
+   • any activity violating the Universal Declaration of Human Rights  
+
+2. SOVEREIGNTY CLAUSE  
+   All deployments must preserve:
+   • user data sovereignty  
+   • the right to export, migrate, or self‑host  
+   • freedom from vendor lock‑in  
+
+3. AI/ML COMMERCIAL TRAINING RESTRICTION  
+   Use of this software or its outputs to train commercial AI/ML
+   systems requires a separate commercial license from the author.
+
+4. FRACTAL CORRECTNESS (STRONG COPYLEFT)  
+   All derivative works must:
+   • retain this license and addendum in full  
+   • remain open and inspectable  
+   • disclose complete source code when used over a network  
+   • preserve authorship attribution  
+
+5. COMMUNITY ENFORCEMENT  
+   Any violation of this license or addendum:
+   • terminates all rights automatically  
+   • requires the violator to fund community legal defense  
+   • prohibits future use of the software by the violator  
+
+6. TRADEMARKS  
+   The names “FungeOS”, “KittyOS”, “EGGLE”, “Airīa”, and “HSON”
+   are trademarks of Darrell Lee Stiltner. Use requires permission.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+COMMERCIAL LICENSING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Commercial use, proprietary integration, OEM embedding, or AI/ML
+training rights require a separate commercial license.
+
+Contact: [your email]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+END OF LICENSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+echo "✅ LICENSE file written (AGPLv3 +  Sovereign Addendum)"
+#!/bin/bash
+# ----------------------------------------------------------------------------
+# CREATE DIRECTORY STRUCTURE
+# ----------------------------------------------------------------------------
+echo "🔧 Creating directories..."
+mkdir -p ~/funge-os/{bin,roms,programs,ancestors,logs,seals}
+mkdir -p ~/funge-os/roms/{brewgrid,ship-ai,wargame-sim,answer-machine,reality-grid,vr-environment,news-ticker,vr-evolution,retro-8bit,first-computer,the-grid-book}
+mkdir -p ~/funge-os/programs/{user,examples,tests}
+mkdir -p ~/funge-os/ancestors/15.58B
+cd ~/funge-os
+echo "✅ Directories created"
+
+# ----------------------------------------------------------------------------
+# WRITE THE FUNGE OS INTERPRETER
+# ----------------------------------------------------------------------------
+echo "⚙️ Writing interpreter..."
+cat > bin/funge-os << 'EOF'
+#!/usr/bin/env python3
+"""
+FungeOS Interpreter — Monolithic Deploy
+GPLv3 Licensed — Copyright (c) 2026 [Your Name]
+"""
+import sys, os, time, random
+from collections import defaultdict
+
+class FungeOS:
+    def __init__(self, width=80, height=25):
+        self.width = width
+        self.height = height
+        self.grid = [[' ']*width for _ in range(height)]
+        self.pointers = {}
+        self.next_pid = 0
+        self.cycles = 0
+        self.start_time = time.time()
+        self.seal = "📚🌍📖∞⚖️"
+        self.ancestors = 0
+        self.rom_name = "unknown"
+        for i, c in enumerate(self.seal):
+            if i<width: self.grid[height-1][i] = c
+
+    # --- Load ROM ---
+    def load_rom(self, filename):
+        self.rom_name = os.path.basename(filename).replace('.rom','')
+        try:
+            with open(filename) as f:
+                lines = f.readlines()
+            for y,line in enumerate(lines):
+                if y>=self.height: break
+                for x,char in enumerate(line):
+                    if x>=self.width: break
+                    if char not in ['\n','\r']: self.grid[y][x]=char
+            print(f"✅ Loaded {self.rom_name}.rom")
+            return True
+        except Exception as e:
+            print(f"❌ Failed to load {filename}: {e}")
+            return False
+
+    # --- Load raw program ---
+    def load_program(self, program_text, start_y=20, start_x=0):
+        lines = program_text.split('\n')
+        for y_off,line in enumerate(lines):
+            y = start_y+y_off
+            if y>=self.height: break
+            for x_off,char in enumerate(line):
+                x = start_x+x_off
+                if x>=self.width: break
+                self.grid[y][x]=char
+        return True
+
+    # --- Create pointer ---
+    def create_pointer(self, x=0, y=0, dx=1, dy=0, stack=None):
+        pid = self.next_pid
+        self.next_pid+=1
+        self.pointers[pid]={'x':x,'y':y,'dx':dx,'dy':dy,'stack':stack or [],'string_mode':False,'alive':True,'rom':self.rom_name,'created':self.cycles}
+        return pid
+
+    # --- Step pointer ---
+    def step(self, pid):
+        if pid not in self.pointers: return False
+        ptr=self.pointers[pid]
+        if not ptr['alive']: return False
+        x,y=ptr['x'],ptr['y']
+        x%=self.width; y%=self.height
+        ptr['x'],ptr['y']=x,y
+        cell=self.grid[y][x]
+
+        # Movement
+        if cell=='>': ptr['dx'],ptr['dy']=1,0
+        elif cell=='<': ptr['dx'],ptr['dy']=-1,0
+        elif cell=='^': ptr['dx'],ptr['dy']=0,-1
+        elif cell=='v': ptr['dx'],ptr['dy']=0,1
+        elif cell=='?': ptr['dx'],ptr['dy']=random.choice([(1,0),(-1,0),(0,1),(0,-1)])
+        # Stack
+        elif cell==':': ptr['stack'].append(ptr['stack'][-1] if ptr['stack'] else 0)
+        elif cell=='\\': 
+            if len(ptr['stack'])>=2: a,b=ptr['stack'].pop(),ptr['stack'].pop(); ptr['stack'].append(a); ptr['stack'].append(b)
+        elif cell=='$' and ptr['stack']: ptr['stack'].pop()
+        # Arithmetic
+        elif cell=='+' and len(ptr['stack'])>=2: ptr['stack'].append(ptr['stack'].pop()+ptr['stack'].pop())
+        elif cell=='-' and len(ptr['stack'])>=2: a,b=ptr['stack'].pop(),ptr['stack'].pop(); ptr['stack'].append(b-a)
+        elif cell=='*' and len(ptr['stack'])>=2: ptr['stack'].append(ptr['stack'].pop()*ptr['stack'].pop())
+        elif cell=='/' and len(ptr['stack'])>=2: a,b=ptr['stack'].pop(),ptr['stack'].pop(); ptr['stack'].append(b//a if a!=0 else 0)
+        elif cell=='%': a,b=ptr['stack'].pop(),ptr['stack'].pop(); ptr['stack'].append(b%a if a!=0 else 0)
+        elif cell=='!': ptr['stack'].append(1 if ptr['stack'].pop()==0 else 0)
+        # I/O
+        elif cell=='.' and ptr['stack']: print(ptr['stack'].pop(),end='',flush=True)
+        elif cell==',' and ptr['stack']: print(chr(ptr['stack'].pop()),end='',flush=True)
+        elif cell=='&':
+            try: ptr['stack'].append(int(input().strip()))
+            except: ptr['stack'].append(0)
+        elif cell=='~':
+            try: ptr['stack'].append(ord(input().strip()[0]))
+            except: ptr['stack'].append(0)
+        # Self-mod
+        elif cell=='g' and len(ptr['stack'])>=2:
+            y_val,x_val=ptr['stack'].pop(),ptr['stack'].pop()
+            ptr['stack'].append(ord(self.grid[y_val%self.height][x_val%self.width]))
+        elif cell=='p' and len(ptr['stack'])>=3:
+            y_val,x_val,v_val=ptr['stack'].pop(),ptr['stack'].pop(),ptr['stack'].pop()
+            self.grid[y_val%self.height][x_val%self.width]=chr(v_val%256)
+        # Control
+        elif cell=='_':
+            val=ptr['stack'].pop() if ptr['stack'] else 0
+            ptr['dx'],ptr['dy']=(1,0) if val==0 else (-1,0)
+        elif cell=='|':
+            val=ptr['stack'].pop() if ptr['stack'] else 0
+            ptr['dx'],ptr['dy']=(0,1) if val==0 else (0,-1)
+        elif cell=='#': ptr['x']=(ptr['x']+ptr['dx'])%self.width; ptr['y']=(ptr['y']+ptr['dy'])%self.height
+        # String mode
+        elif cell=='"': ptr['string_mode']=not ptr['string_mode']
+        # Numbers
+        elif cell in '0123456789' and not ptr['string_mode']: ptr['stack'].append(int(cell))
+        elif ptr['string_mode']: ptr['stack'].append(ord(cell))
+        # Stop
+        elif cell=='@': ptr['alive']=False; return False
+
+        ptr['x']=(ptr['x']+ptr['dx'])%self.width
+        ptr['y']=(ptr['y']+ptr['dy'])%self.height
+        self.cycles+=1
+        return True
+
+    # --- Run ---
+    def run(self, pid=None, max_steps=None):
+        if pid is None:
+            steps=0
+            while self.pointers:
+                for p in list(self.pointers.keys()):
+                    if not self.step(p): del self.pointers[p]
+                    steps+=1
+                    if max_steps and steps>=max_steps: return
+        else:
+            count=0
+            while pid in self.pointers and self.pointers[pid]['alive']:
+                self.step(pid)
+                count+=1
+                if max_steps and count>=max_steps: break
+
+    # --- Render ---
+    def render(self):
+        print('\n╔'+'═'*self.width+'╗')
+        for y in range(self.height):
+            print('║'+''.join(self.grid[y])+'║')
+        print('╚'+'═'*self.width+'╝')
+        uptime=int(time.time()-self.start_time)
+        print(f"📚🌍📖∞⚖️ {self.rom_name} | Cycles: {self.cycles} | Uptime: {uptime}s | Pointers: {len(self.pointers)} | Ancestors: {self.ancestors}")
+
+# --- Main ---
+def main():
+    import sys
+    if len(sys.argv)<2:
+        print("Usage: funge-os <rom> | --multiverse | --program <text>")
+        return
+    arg=sys.argv[1]
+    f=FungeOS()
+    if arg=='--program': f.load_program(sys.argv[2]); f.create_pointer(); f.run(); f.render(); return
+    if arg=='--multiverse':
+        roms=[f"roms/{r}/{r}.rom" for r in ["brewgrid","ship-ai","wargame-sim","answer-machine","reality-grid","vr-environment","news-ticker","vr-evolution","retro-8bit","first-computer","the-grid-book"]]
+        oses=[]
+        for rom in roms:
+            if os.path.exists(rom):
+                ff=FungeOS(); ff.load_rom(rom); ff.create_pointer(); oses.append(ff)
+        print(f"🌐 {len(oses)} computers online")
+        return
+    if os.path.exists(arg): f.load_rom(arg); f.create_pointer(); f.run(); f.render(); return
+    print(f"ROM file not found: {arg}")
+
+if __name__=='__main__': main()
+EOF
+chmod +x bin/funge-os
+echo "✅ Interpreter written"
+
+# ----------------------------------------------------------------------------
+# You can add ROMs, example programs, multiverse.sh, and ancestor placeholders
+# similar to your previous monolithic deploy script.
+# ----------------------------------------------------------------------------
+
+echo "📚🌍📖∞⚖️ FungeOS Monolithic Deploy Complete! Ready to run with:"
+echo "bash deploy.sh"
+echo "or ./bin/funge-os <rom>"# ----------------------------------------------------------------------------
+# LICENSE: Write AGPLv3 + HSON Sovereign Addendum LICENSE file
+# ----------------------------------------------------------------------------
+cat > LICENSE << 'EOF'
+ / FungeOS Meta‑OS License
+Copyright © 2026 Darrell Lee Stiltner
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+This software is licensed under:
+
+GNU AFFERO GENERAL PUBLIC LICENSE v3.0  
+WITH HSON SOVEREIGN ADDENDUM v1.0  
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public
+License along with this program. If not, see:
+https://www.gnu.org/licenses/agpl-3.0.en.html
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HSON SOVEREIGN ADDENDUM (AGPLv3 Section 7 Additional Terms)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. NON‑VIOLENCE INVARIANT  
+   This software may not be used for:
+   • military systems  
+   • weapons development  
+   • surveillance systems  
+   • torture, oppression, or human rights violations  
+   • any activity violating the Universal Declaration of Human Rights  
+
+2. SOVEREIGNTY CLAUSE  
+   All deployments must preserve:
+   • user data sovereignty  
+   • the right to export, migrate, or self‑host  
+   • freedom from vendor lock‑in  
+
+3. AI/ML COMMERCIAL TRAINING RESTRICTION  
+   Use of this software or its outputs to train commercial AI/ML
+   systems requires a separate commercial license from the author.
+
+4. FRACTAL CORRECTNESS (STRONG COPYLEFT)  
+   All derivative works must:
+   • retain this license and addendum in full  
+   • remain open and inspectable  
+   • disclose complete source code when used over a network  
+   • preserve authorship attribution  
+
+5. COMMUNITY ENFORCEMENT  
+   Any violation of this license or addendum:
+   • terminates all rights automatically  
+   • requires the violator to fund community legal defense  
+   • prohibits future use of the software by the violator  
+
+6. TRADEMARKS  
+   The names “FungeOS”, “KittyOS”, “EGGLE”, “Airīa”, and “HSON”
+   are trademarks of Darrell Lee Stiltner. Use requires permission.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+COMMERCIAL LICENSING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Commercial use, proprietary integration, OEM embedding, or AI/ML
+training rights require a separate commercial license.
+
+Contact: [leelastiltner@gmail.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+END OF LICENSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+echo "✅ LICENSE file written (AGPLv3 + HSON Sovereign Addendum)"
